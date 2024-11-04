@@ -1,0 +1,177 @@
+type GlobalDoodleConfig {
+  feedback_survey: String
+}
+
+type LogPb {
+  impr_id: String
+}
+
+type Extra {
+  now: Int
+  logid: String
+  search_request_id: String
+  api_debug_info: String
+  fatal_item_ids: [String]
+}
+
+type Common {
+  doc_id_str: String
+}
+
+type AuthorStats {
+  followingCount: Int
+  followerCount: Int
+  heartCount: Int
+  videoCount: Int
+  diggCount: Int
+  heart: Int
+}
+
+type TextExtra {
+  awemeId: String
+  start: Int
+  end: Int
+  hashtagName: String
+  hashtagId: String
+  type: Int
+  userId: String
+  isCommerce: Boolean
+  userUniqueId: String
+  secUid: String
+  subType: Int
+}
+
+type DuetInfo {
+  duetFromId: String
+}
+
+type Stats {
+  diggCount: Int
+  shareCount: Int
+  commentCount: Int
+  playCount: Int
+  collectCount: Int
+}
+
+type Challenge {
+  id: String
+  title: String
+  desc: String
+  profileThumb: String
+  profileMedium: String
+  profileLarger: String
+  coverThumb: String
+  coverMedium: String
+  coverLarger: String
+  isCommerce: Boolean
+}
+
+type Music {
+  id: String
+  title: String
+  playUrl: String
+  coverThumb: String
+  coverMedium: String
+  coverLarge: String
+  authorName: String
+  original: Boolean
+  duration: Int
+  album: String
+}
+
+type Author {
+  id: String
+  uniqueId: String
+  nickname: String
+  avatarThumb: String
+  avatarMedium: String
+  avatarLarger: String
+  signature: String
+  verified: Boolean
+  secUid: String
+  secret: Boolean
+  ftc: Boolean
+  relation: Int
+  openFavorite: Boolean
+  commentSetting: Int
+  duetSetting: Int
+  stitchSetting: Int
+  privateAccount: Boolean
+  downloadSetting: Int
+}
+
+type Video {
+  id: String
+  height: Int
+  width: Int
+  duration: Int
+  ratio: String
+  cover: String
+  originCover: String
+  dynamicCover: String
+  playAddr: String
+	playAddrPublic: String
+  reflowCover: String
+  bitrate: Int
+  encodedType: String
+  format: String
+  videoQuality: String
+  encodeUserTag: String
+  shareCover: [String]
+}
+
+type Item {
+  id: String
+  desc: String
+  createTime: Int
+  originalItem: Boolean
+  officalItem: Boolean
+  secret: Boolean
+  forFriend: Boolean
+  digged: Boolean
+  itemCommentStatus: Int
+  showNotPass: Boolean
+  vl1: Boolean
+  itemMute: Boolean
+  privateItem: Boolean
+  duetEnabled: Boolean
+  stitchEnabled: Boolean
+  shareEnabled: Boolean
+  isAd: Boolean
+  collected: Boolean
+  authorStats: AuthorStats
+  textExtra: [TextExtra]
+  duetInfo: DuetInfo
+  stats: Stats
+  challenges: [Challenge]
+  music: Music
+  author: Author
+  video: Video
+}
+
+type VideoItem {
+  type: Int
+  common: Common
+  item: Item
+}
+
+type TiktokSearchResponse {
+  status_code: Int
+  qc: String
+  cursor: Int
+  has_more: Int
+  backtrace: String
+  global_doodle_config: GlobalDoodleConfig
+  log_pb: LogPb
+  extra: Extra
+  data: [VideoItem]
+}
+
+extend type Query {
+  getTiktok(id: String!): VideoItem
+  searchTiktok(keyword: String!): [VideoItem!]
+}
+
+extend type Subscription {
+  subSearchTiktok(keyword: String!): [VideoItem!]
+}
