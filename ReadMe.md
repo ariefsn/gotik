@@ -44,3 +44,5 @@ GoTik is an app for getting video from tiktok.
     ```shell
     yarn dev
     ```
+
+Check the video sample: <https://github.com/ariefsn/gotik/raw/refs/heads/main/GoTik.mp4>
